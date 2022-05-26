@@ -1,7 +1,8 @@
-const router = require('express').Router()
+const cars =require('../db.json')
+
 exports.index = (req, res )=>{
-    res.render('index')
+    res.render('index' , {cars})
 }
 exports.about= (req,res)=>{
-    res.render('about')
+    res.render('index', )
 }
