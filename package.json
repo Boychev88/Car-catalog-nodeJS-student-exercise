@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/emkataag/Car-catalog-nodeJS-/issues"
   },
-  "homepage": "https://github.com/emkataag/Car-catalog-nodeJS-#readme"
+  "homepage": "https://github.com/emkataag/Car-catalog-nodeJS-#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "nodemon": "^2.0.16"
+  }
 }
