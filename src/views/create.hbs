@@ -2,21 +2,16 @@
   <h1>Create</h1>
   <div class="form">
     <form action="/car/create" method="POST">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name">
-      <label for="name">Description</label>
-      <textarea id="name" name="description"></textarea>
+      <label for="mark">Mark</label>
+      <input type="text" id="mark" name="name">
+      <label for="model">Model</label> 
+      <input type="text" id="model" name="model">
+      <label for="gen">Gen</label>
+      <input type="text" name="gen" id="gen">
       <label for="image">ImageUrl</label>
       <input type="text" id="image" name="imageUrl">
-      <label for="difficulty">Difficulty</label>
-      <select id="difficulty" name="difficultyLevel">
-        <option value="1">1 - Very Easy</option>
-        <option value="2">2 - Easy</option>
-        <option value="3">3 - Medium (Standard 3x3)</option>
-        <option value="4">4 - Intermediate</option>
-        <option value="5">5 - Expert</option>
-        <option value="6">6 - Hardcore</option>
-      </select>
+      <label for="name">Description</label>
+      <textarea id="name" name="description"></textarea>
       <input type="submit" value="Create">
     </form>
   </div>
