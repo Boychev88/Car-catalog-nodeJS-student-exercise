@@ -2,6 +2,7 @@ const fs = require('fs/promises');
 const path = require('path');
 
 const cars = require('../db.json');
+exports.getOne = (carId)=> cars[carId];
 
 exports.save = (car) => {
     cars.push(car);

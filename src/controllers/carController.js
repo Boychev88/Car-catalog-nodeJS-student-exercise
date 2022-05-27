@@ -5,17 +5,19 @@ router.get('/create', (req, res) => {
     res.render('create');
 });
 
-router.post('/create', async (req,res)=>{
+router.post('/create', async (req, res) => {
     const car = req.body;
-     try{
-         await carService.save(car);
-         res.redirect('/');
-     }catch (error){
-       res.status(400).send(error);
-   }
+    try {
+        await carService.save(car);
+        res.redirect('/');
+    } catch (error) {
+        res.status(400).send(error);
+    }
 });
-router.get('/details/:id', (req ,res )=>{
-    res.render('details')
+router.get('/details/:id', (req, res) => {
+    const car = carService.getOne(req.params.id);
+
+    res.render('details', { car });
 })
 
 module.exports = router;
