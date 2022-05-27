@@ -1,26 +1,30 @@
 [
     {
-        "id": "0",
+        "id": 0,
         "mark": "BMW",
         "model": "535d",
-        "description": "Best car ",
+        "gen": "e60",
         "imageUrl": "https://img.bmw-syndikat.de/gallery/129/888/534931_bmw-syndikat_bild_high.jpg",
-        "gen": "e60"
+        "description": "Best car "
     },
     {
-        "id": "1",
+        "id": 1,
         "mark": "BMW",
         "model": "535d",
+        "gen": "E60",
         "imageUrl": "https://i.ytimg.com/vi/iNXV83021zE/maxresdefault.jpg",
-        "gen": "E60"
+        "description": "My car"
     },
     {
-        "name": "BMW",
-        "description": "My car",
+        "id": 2,
+        "mark": "BMW",
+        "model": "535d",
+        "gen": "e60",
         "imageUrl": "https://th.bing.com/th/id/R.ba44338a9901ffe6fdd3987da1dd888b?rik=vNvoJyE01Tu4sA&pid=ImgRaw&r=0",
-        "gen": "e60"
+        "description": "My car"
     },
     {
+        "id": 3,
         "name": "BMW",
         "model": "320i",
         "gen": "e46",
