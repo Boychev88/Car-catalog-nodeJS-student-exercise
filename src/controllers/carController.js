@@ -16,8 +16,8 @@ router.post('/create', async (req, res) => {
 });
 router.get('/details/:id', (req, res) => {
     const car = carService.getOne(req.params.id);
-
-    res.render('details', { car });
+   res.render('details', {car});
+    console.log(car);
 })
 
 module.exports = router;
