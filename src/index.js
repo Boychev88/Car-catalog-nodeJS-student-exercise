@@ -1,22 +1,23 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
-const routers = require('./routes')
+const { initializeDatabase } = require('./config/dataBase')
+const routers = require('./routes');
+const handlebars = require('./config/handlebars')
+
 const app = express();
-app.use('/static',express.static('public'));
+handlebars(app)
 
-app.engine('hbs',handlebars.engine({
-    extname:'hbs'
-}));
-app.use(express.urlencoded({extended: false}))
-app.set('view engine','hbs');
-app.set('views','./src/views');
-// app.get('/', (req,res)=>{
-//     res.render('index')
-// })
+app.use('/static', express.static('public'));
+
+app.use(express.urlencoded({ extended: false }));
+
+
 app.use(routers);
+initializeDatabase()
+    .then(() => {
+        app.listen(5000, () => console.log(`App is listening on port 5000`));
+    })
+    .catch((err) => {
+        console.log('Cannot connect to db', err);
+    })
 
 
-app.set('view engine', 'hbs');
-
-
-app.listen(5000, ()=>console.log(`App is listening on port 5000`));
