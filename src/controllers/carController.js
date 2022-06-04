@@ -17,7 +17,13 @@ router.post('/create', async (req, res) => {
 });
 router.get('/details/:id', async (req, res) => {
     const car = await carService.getOne(req.params.id).lean();
-   res.render('details', {car});
+    res.render('details', { car });
+})
+
+router.get('/:carId/attach', async (req, res) => {
+    const car = await carService.getOne(req.params.carId).lean()
+    res.render('accessory/attach', { car })
+
 })
 
 module.exports = router;

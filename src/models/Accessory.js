@@ -9,7 +9,7 @@ const accessorySchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
-        validate: function(){
+        validate: function () {
             return this.imageUrl.startsWith('http')
         }
     },
@@ -18,10 +18,12 @@ const accessorySchema = new mongoose.Schema({
         maxlength: 300,
         required: true
     },
-    car: {
-        type : mongoose.Types.ObjectId,
-        ref: 'Car'
-    }
+    cars: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Car'
+        }
+    ]
 });
 
 const Accessory = mongoose.model('Accessory', accessorySchema);
