@@ -18,6 +18,10 @@ const accessorySchema = new mongoose.Schema({
         maxlength: 300,
         required: true
     },
+    car: {
+        type : mongoose.Types.ObjectId,
+        ref: 'Car'
+    }
 });
 
 const Accessory = mongoose.model('Accessory', accessorySchema);

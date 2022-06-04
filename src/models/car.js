@@ -23,8 +23,15 @@ const carSchema = new mongoose.Schema({
     gen: {
         type: String,
         required : true
-    }
-}) ;
+    },
+    accessory : [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Accessory'
+        }
+    ]
+
+});
 
 let Cars = mongoose.model('Car',carSchema);
 module.exports = Cars
