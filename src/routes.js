@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.use('/', homeController);
 router.use('/car', carController)
-router.use('accessory', accessoryController)
+router.use('/accessory', accessoryController)
 
 module.exports = router;
