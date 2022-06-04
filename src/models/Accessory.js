@@ -9,7 +9,9 @@ const accessorySchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
-        validate: /^https?/g
+        validate: function(){
+            return this.imageUrl.startsWith('http')
+        }
     },
     description: {
         type: String,
