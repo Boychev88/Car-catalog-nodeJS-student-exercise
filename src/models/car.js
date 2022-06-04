@@ -19,7 +19,11 @@ const carSchema = new mongoose.Schema({
         type: String,
         required : true,
 
-    }   
+    },
+    gen: {
+        type: String,
+        required : true
+    }
 }) ;
 
 let Cars = mongoose.model('Car',carSchema);
