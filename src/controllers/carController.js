@@ -8,16 +8,16 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
     const car = req.body;
     try {
-        await carService.save(car);
+        await carService.crate(car);
         res.redirect('/');
     } catch (error) {
+        console.log(error);
         res.status(400).send(error);
     }
 });
-router.get('/details/:id', (req, res) => {
-    const car = carService.getOne(req.params.id);
+router.get('/details/:id', async (req, res) => {
+    const car = await carService.getOne(req.params.id).lean();
    res.render('details', {car});
-    console.log(car);
 })
 
 module.exports = router;
