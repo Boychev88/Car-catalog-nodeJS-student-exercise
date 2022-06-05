@@ -1,8 +1,11 @@
 const Accessory = require('../models/Accessory');
 
 
-exports.getAll = ()=> Accessory.find()
+exports.getAll = ()=> {
+    return Accessory.find();
+}
 
 exports.create = (accessoryData)=>{
     return Accessory.create(accessoryData);
 }
+
