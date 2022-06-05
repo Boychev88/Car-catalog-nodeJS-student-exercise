@@ -29,9 +29,8 @@ router.get('/:carId/attach', async (req, res) => {
 
 router.post('/:carId/attach', async (req,res)=>{
     const accessoryId = req.body.accessory;
-    console.log(accessoryId);
     await carService.attachAccessory(req.params.carId, accessoryId)
-    res.redirect(`car/details/${req.params.carId}`)
+    res.redirect(`/`)
 })
 
 module.exports = router;

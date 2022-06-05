@@ -8,7 +8,7 @@ exports.getAll = (searchMark = '', searchModel = '', searchGen = '') => {
 }
 
 exports.getOne = (carId) => {
-    return Car.findById(carId)
+    return Car.findById(carId).populate('accessory')
 }
 
 
@@ -18,8 +18,6 @@ exports.crate = (car) => {
 exports.attachAccessory = async (carId, accessoryId) => {
     const car = await Car.findById(carId);
     const accessory = await Accessory.findById(accessoryId);
-console.log(car);
-console.log(accessory);
     car.accessory.push(accessory);
     accessory.cars.push(car);
 
