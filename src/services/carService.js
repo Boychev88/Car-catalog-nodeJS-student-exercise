@@ -1,16 +1,21 @@
 const Accessory = require('../models/Accessory');
 const Car = require('../models/Car');
 
-exports.getAll = (searchMark = '', searchModel = '', searchGen = '') => {
+exports.getAll = async (searchMark = '', searchModel = '', searchGen = '') => {
+    let cars = await Car.find(
+        {
+            mark: { $regex: new RegExp(searchMark, 'i') },
+            model: { $regex: new RegExp(searchModel, 'i') },
+            gen: { $regex: new RegExp(searchGen, 'i') }
+        }).lean()
 
-    return Car.find().lean()
-
+    return cars
 }
 
 exports.getOne = (carId) => {
     return Car.findById(carId)
 };
-exports.getOneDetails = (carId)=>{
+exports.getOneDetails = (carId) => {
     return Car.findById(carId).populate('accessory')
 }
 
