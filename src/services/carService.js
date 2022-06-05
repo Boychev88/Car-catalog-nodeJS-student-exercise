@@ -8,6 +8,9 @@ exports.getAll = (searchMark = '', searchModel = '', searchGen = '') => {
 }
 
 exports.getOne = (carId) => {
+    return Car.findById(carId)
+};
+exports.getOneDetails = (carId)=>{
     return Car.findById(carId).populate('accessory')
 }
 

@@ -16,13 +16,13 @@ router.post('/create', async (req, res) => {
     }
 });
 router.get('/details/:id', async (req, res) => {
-    const car = await carService.getOne(req.params.id).lean();
+    const car = await carService.getOneDetails(req.params.id).lean();
     res.render('details', { car });
 })
 
 router.get('/:carId/attach', async (req, res) => {
     const car = await carService.getOne(req.params.carId).lean();
-    const accessories = await accessoryService.getAll().lean()
+    const accessories = await accessoryService.getAllWithout(car.accessory).lean();
     res.render('accessory/attach', { car , accessories});
 
 });
