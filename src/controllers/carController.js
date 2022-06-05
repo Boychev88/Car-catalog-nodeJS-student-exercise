@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const carService = require('../services/carService')
-
+const accessoryService = require('../services/accessoryService')
 router.get('/create', (req, res) => {
     res.render('create');
 });
@@ -21,9 +21,10 @@ router.get('/details/:id', async (req, res) => {
 })
 
 router.get('/:carId/attach', async (req, res) => {
-    const car = await carService.getOne(req.params.carId).lean()
-    res.render('accessory/attach', { car })
+    const car = await carService.getOne(req.params.carId).lean();
+    const accessories = await accessoryService.getAll().lean()
+    res.render('accessory/attach', { car , accessories});
 
-})
+});
 
 module.exports = router;
