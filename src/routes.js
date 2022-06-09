@@ -10,5 +10,8 @@ router.use('/', homeController);
 router.use('/car', carController)
 router.use('/auth', authController)
 router.use('/accessory', accessoryController)
+router.use ('*', (req, res )=>{
+    res.render('404');
+});
 
 module.exports = router;

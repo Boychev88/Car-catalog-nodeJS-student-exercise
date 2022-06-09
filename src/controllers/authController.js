@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const authService = require('../services/authService');
 
 
 
@@ -7,9 +8,16 @@ const router = require('express').Router();
      res.render('auth/register');
  });
 
- router.post('/register', (req,res)=>{
-     console.log(req.body);
-     res.redirect('/')
+ router.post('/register', async (req,res)=>{
+     
+     let createUser = await authService.register(req.body);
+     console.log(createUser);
+
+      if(createUser){
+        res.redirect('/login')
+      }else {
+        res.redirect('/404')
+      }
  });
 
 
