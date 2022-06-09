@@ -4,26 +4,29 @@ const authService = require('../services/authService');
 
 
 
- router.get('/register',(req,res)=>{
-     res.render('auth/register');
- });
+router.get('/register', (req, res) => {
+	res.render('auth/register');
+});
 
- router.post('/register', async (req,res)=>{
-     
-     let createUser = await authService.register(req.body);
-     console.log(createUser);
+router.post('/register', async (req, res) => {
 
-      if(createUser){
-        res.redirect('/login')
-      }else {
-        res.redirect('/404')
-      }
- });
+	let createUser = await authService.register(req.body);
+	console.log(createUser);
+
+	if (createUser) {
+		res.redirect('/login')
+	} else {
+		res.redirect('/404')
+	}
+});
+
+router.get('/login', (req, res )=>{
+	res.render('login')
+});
 
 
 
 
 
 
-
- module.exports = router;
+module.exports = router;
