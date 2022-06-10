@@ -20,17 +20,28 @@ exports.register = async (user) => {
 
 };
 
-exports.login = async (userData)=>{
-    const {username , password} = userData;
-    const user = await User.findOne({username});
-    if(!user){
+exports.login = async (userData) => {
+    const { username, password } = userData;
+    const user = await User.findOne({ username });
+    if (!user) {
         return;
     }
 
-    const isValid = await bcrypt.compare()
-    if(user){
-        return 
+    const isValid = await bcrypt.compare(password, user.password)
+    if (!isValid) {
+        return
     }
 
+    const result = new Promise((resolve, reject) => {
+
+        jwt.sign({ _id: user._id, username: user.username }, secrets, { expiresIn: '2d' }, (err, token) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(token) ;
+        })
+
+    })
+    return result;
 
 }
