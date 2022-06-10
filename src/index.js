@@ -6,12 +6,12 @@ const handlebars = require('./config/handlebars');
 
 const app = express();
 handlebars(app)
-app.use(cookieParser())
+
 app.use('/static', express.static('public'));
-
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }));
-
 app.use(routers);
+
 initializeDatabase()
     .then(() => {
         app.listen(5000, () => console.log(`App is listening on port 5000`));

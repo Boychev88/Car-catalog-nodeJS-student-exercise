@@ -23,14 +23,35 @@ router.get('/details/:id', async (req, res) => {
 router.get('/:carId/attach', async (req, res) => {
     const car = await carService.getOne(req.params.carId).lean();
     const accessories = await accessoryService.getAllWithout(car.accessory).lean();
-    res.render('accessory/attach', { car , accessories});
+    res.render('accessory/attach', { car, accessories });
 
 });
 
-router.post('/:carId/attach', async (req,res)=>{
+router.post('/:carId/attach', async (req, res) => {
     const accessoryId = req.body.accessory;
     await carService.attachAccessory(req.params.carId, accessoryId)
     res.redirect(`/`)
-})
+});
+
+
+router.get('/:carId/edit', async (req, res) => {
+    const car = await carService.getOne(req.params.carId).lean();
+    if (!car) {
+        return res.redirect('404')
+    }
+    res.render('car/edit', { car })
+});
+
+router.post('/:carId/edit', async (req, res) => {
+    const modifiedCar = await carService.edit(req.params.carId, req.body);
+    
+    if(!modifiedCar){
+        return res.redirect('404')
+    }
+
+    res.redirect(`/car/details/${modifiedCar._id}`)
+});
+
+
 
 module.exports = router;

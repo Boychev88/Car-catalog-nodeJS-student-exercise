@@ -33,3 +33,7 @@ exports.attachAccessory = async (carId, accessoryId) => {
     await accessory.save();
     return car;
 };
+
+exports.edit = (carId , carData)=>{
+    return Car.findByIdAndUpdate(carId, carData);
+}
