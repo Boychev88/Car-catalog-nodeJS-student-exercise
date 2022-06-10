@@ -20,10 +20,13 @@ router.post('/register', async (req, res) => {
 	}
 });
 
-router.get('/login', (req, res )=>{
-	res.render('login')
+router.get('/login', (req, res) => {
+	res.render('auth/login')
 });
 
+router.post('/login',(req,res)=>{
+	
+})
 
 
 

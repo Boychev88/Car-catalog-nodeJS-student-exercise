@@ -18,4 +18,19 @@ exports.register = async (user) => {
     });
     return createUser;
 
+};
+
+exports.login = async (userData)=>{
+    const {username , password} = userData;
+    const user = await User.findOne({username});
+    if(!user){
+        return;
+    }
+
+    const isValid = await bcrypt.compare()
+    if(user){
+        return 
+    }
+
+
 }
