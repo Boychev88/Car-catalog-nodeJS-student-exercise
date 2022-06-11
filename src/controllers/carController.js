@@ -1,12 +1,15 @@
 const router = require('express').Router();
-const carService = require('../services/carService')
-const accessoryService = require('../services/accessoryService')
-router.get('/create', (req, res) => {
+const carService = require('../services/carService');
+const accessoryService = require('../services/accessoryService');
+const { isAuth} = require('../middleware/authMiddleware');
+
+router.get('/create', isAuth, (req, res) => {
     res.render('create');
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create',isAuth, async (req, res) => {
     const car = req.body;
+    car.owner = req.user._id;
     try {
         await carService.crate(car);
         res.redirect('/');
@@ -20,32 +23,37 @@ router.get('/details/:id', async (req, res) => {
     res.render('details', { car });
 })
 
-router.get('/:carId/attach', async (req, res) => {
+router.get('/:carId/attach', isAuth, async (req, res) => {
     const car = await carService.getOne(req.params.carId).lean();
     const accessories = await accessoryService.getAllWithout(car.accessory).lean();
     res.render('accessory/attach', { car, accessories });
 
 });
 
-router.post('/:carId/attach', async (req, res) => {
+router.post('/:carId/attach', isAuth, async (req, res) => {
     const accessoryId = req.body.accessory;
     await carService.attachAccessory(req.params.carId, accessoryId)
     res.redirect(`/`)
 });
 
 
-router.get('/:carId/edit', async (req, res) => {
+router.get('/:carId/edit', isAuth, async (req, res) => {
     const car = await carService.getOne(req.params.carId).lean();
+    if(car.owner != req.user._id){
+        return res.redirect('404')
+
+    }
     if (!car) {
         return res.redirect('404')
     }
+
     res.render('car/edit', { car })
 });
 
 router.post('/:carId/edit', async (req, res) => {
     const modifiedCar = await carService.edit(req.params.carId, req.body);
-    
-    if(!modifiedCar){
+
+    if (!modifiedCar) {
         return res.redirect('404')
     }
 
