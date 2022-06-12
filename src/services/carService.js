@@ -7,22 +7,24 @@ exports.getAll = async (searchMark = '', searchModel = '', searchGen = '') => {
             mark: { $regex: new RegExp(searchMark, 'i') },
             model: { $regex: new RegExp(searchModel, 'i') },
             gen: { $regex: new RegExp(searchGen, 'i') }
-        }).lean()
+        }).lean();
 
-    return cars
+    return cars;
 }
 
 exports.getOne = (carId) => {
-    return Car.findById(carId)
+    return Car.findById(carId);
 };
 exports.getOneDetails = (carId) => {
-    return Car.findById(carId).populate('accessory')
+    return Car.findById(carId).populate('accessory');
 }
 
 
 exports.crate = (car) => {
-    return Car.create(car)
+    return Car.create(car);
 }
+
+
 exports.attachAccessory = async (carId, accessoryId) => {
     const car = await Car.findById(carId);
     const accessory = await Accessory.findById(accessoryId);
@@ -34,8 +36,8 @@ exports.attachAccessory = async (carId, accessoryId) => {
     return car;
 };
 
-exports.edit = (carId , carData)=>{
+exports.edit = (carId, carData) => {
     return Car.findByIdAndUpdate(carId, carData);
-}
+};
 
 exports.delete = (carId) => Car.findByIdAndDelete(carId);

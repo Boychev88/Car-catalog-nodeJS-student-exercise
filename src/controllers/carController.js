@@ -34,44 +34,43 @@ router.get('/:carId/attach', isAuth, async (req, res) => {
 
 router.post('/:carId/attach', isAuth, async (req, res) => {
     const accessoryId = req.body.accessory;
-    await carService.attachAccessory(req.params.carId, accessoryId)
-    res.redirect(`/`)
+    await carService.attachAccessory(req.params.carId, accessoryId);
+    res.redirect(`/`);
 });
 
 
 router.get('/:carId/edit', isAuth, async (req, res) => {
     const car = await carService.getOne(req.params.carId).lean();
-    console.log(car);
     if (car.owner != req.user._id) {
-        return res.redirect('404')
+        return res.redirect('404');
 
     }
     if (!car) {
-        return res.redirect('404')
+        return res.redirect('404');
     }
 
-    res.render('car/edit', { car })
+    res.render('car/edit', { car });
 });
 
 router.post('/:carId/edit', async (req, res) => {
     const modifiedCar = await carService.edit(req.params.carId, req.body);
 
     if (!modifiedCar) {
-        return res.redirect('404')
+        return res.redirect('404');
     }
 
-    res.redirect(`/car/details/${modifiedCar._id}`)
+    res.redirect(`/car/details/${modifiedCar._id}`);
 });
 
 router.get('/:carId/delete', async (req, res) => {
 
     const car = await carService.getOne(req.params.carId).lean();
-    res.render('car/delete', {car} )
+    res.render('car/delete', {car} );
 });
 router.post('/:carId/delete', async (req, res) => {
     await carService.delete(req.params.carId);
 
-    res.redirect('/')
+    res.redirect('/');
 })
 
 
