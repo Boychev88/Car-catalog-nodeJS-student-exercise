@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const carService = require('../services/carService');
 const accessoryService = require('../services/accessoryService');
-const { isAuth} = require('../middleware/authMiddleware');
+const { isAuth } = require('../middleware/authMiddleware');
 
 router.get('/create', isAuth, (req, res) => {
     res.render('create');
 });
 
-router.post('/create',isAuth, async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
     const car = req.body;
     car.owner = req.user._id;
     try {
@@ -20,7 +20,9 @@ router.post('/create',isAuth, async (req, res) => {
 });
 router.get('/details/:id', async (req, res) => {
     const car = await carService.getOneDetails(req.params.id).lean();
-    res.render('details', { car });
+    const isOwner = car.owner == req.user?._id;
+    console.log(car);
+    res.render('details', { car, isOwner });
 })
 
 router.get('/:carId/attach', isAuth, async (req, res) => {
@@ -39,7 +41,8 @@ router.post('/:carId/attach', isAuth, async (req, res) => {
 
 router.get('/:carId/edit', isAuth, async (req, res) => {
     const car = await carService.getOne(req.params.carId).lean();
-    if(car.owner != req.user._id){
+    console.log(car);
+    if (car.owner != req.user._id) {
         return res.redirect('404')
 
     }
@@ -60,6 +63,16 @@ router.post('/:carId/edit', async (req, res) => {
     res.redirect(`/car/details/${modifiedCar._id}`)
 });
 
+router.get('/:carId/delete', async (req, res) => {
+
+    const car = await carService.getOne(req.params.carId).lean();
+    res.render('car/delete', {car} )
+});
+router.post('/:carId/delete', async (req, res) => {
+    await carService.delete(req.params.carId);
+
+    res.redirect('/')
+})
 
 
 module.exports = router;

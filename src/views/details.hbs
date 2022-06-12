@@ -6,14 +6,19 @@
 		<p><span>Gen:</span>{{car.gen}}</p>
 		<p><span>Description:</span>{{car.description}}</p>
 		<a class="btn" href="/">Back</a>
+		{{#if user}}
 		<a class="btn" href="/car/{{car._id}}/attach">Attach</a>
+		{{#if isOwner}}
 		<a class="btn" href="/car/{{car._id}}/edit">Edit</a>
+		<a class="btn" href="/car/{{car._id}}/delete">Delete</a>
+		{{/if}}
+		{{/if}}
 	</div>
 	<h2>Accessories</h2>
 	<div class="accessories">
 
 		{{#each car.accessory}}
-			{{> accessory}}
+		{{> accessory}}
 		{{else}}
 		<h3 class="italic">This cube has no accessories yet...</h3>
 		{{/each}}

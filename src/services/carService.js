@@ -37,3 +37,5 @@ exports.attachAccessory = async (carId, accessoryId) => {
 exports.edit = (carId , carData)=>{
     return Car.findByIdAndUpdate(carId, carData);
 }
+
+exports.delete = (carId) => Car.findByIdAndDelete(carId);
